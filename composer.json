@@ -1,5 +1,5 @@
 {
-    "name": "cjmellor/level-up",
+    "name": "tool2/level-up",
     "description": "This package allows users to gain experience points (XP) and progress through levels by performing actions on your site. It can provide a simple way to track user progress and implement gamification elements into your application",
     "keywords": [
         "cjmellor",
@@ -21,6 +21,7 @@
         "php": "^8.1",
         "illuminate/contracts": "^10.0",
         "laravel/pint": "^1.10",
+        "rennokki/laravel-eloquent-query-cache": "^3.4",
         "spatie/laravel-package-tools": "^1.15"
     },
     "require-dev": {
