@@ -16,4 +16,5 @@ class Achievement extends Model
     {
         return $this->belongsToMany(related: config(key: 'level-up.user.model'));
     }
+
 }
