@@ -194,6 +194,20 @@ trait GiveExperience
         return $this->experience;
     }
 
+    //Set week points
+    public function setWeekPoints(int $amount): Experience
+    {
+        if (! $this->experience()->exists()) {
+            throw new Exception(message: 'User has no experience record.');
+        }
+
+        $this->experience->update(attributes: [
+            'week_experience_points' => $amount,
+        ]);
+
+        return $this->experience;
+    }
+
     public function withMultiplierData(array|callable $data): static
     {
         if ($data instanceof Closure) {
