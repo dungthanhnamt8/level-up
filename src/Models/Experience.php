@@ -23,6 +23,7 @@ class Experience extends Model
         return $this->belongsTo(related: Level::class, foreignKey: 'experience_id');
     }
 
+
     use QueryCacheable;
 
     /**

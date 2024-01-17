@@ -72,6 +72,7 @@ trait GiveExperience
             $experience = $this->experience()->create(attributes: [
                 'level_id' => $level->level ?? config(key: 'level-up.starting_level'),
                 'experience_points' => $amount,
+                'week_experience_points' => $amount,
             ]);
 
             /**
@@ -98,6 +99,8 @@ trait GiveExperience
         }
 
         $this->experience->increment(column: 'experience_points', amount: $amount);
+        //week_experience_points
+        $this->experience->increment(column: 'week_experience_points', amount: $amount);
 
         $this->dispatchEvent($amount, $type, $reason);
 
@@ -145,6 +148,12 @@ trait GiveExperience
         return $this->experience->status->level;
     }
 
+    //Get week level
+    public function getWeekLevel(): int
+    {
+        return $this->experience->status->week_level;
+    }
+
     public function experienceHistory(): HasMany
     {
         return $this->hasMany(related: ExperienceAudit::class);
@@ -179,6 +188,7 @@ trait GiveExperience
 
         $this->experience->update(attributes: [
             'experience_points' => $amount,
+            'week_experience_points' => $amount,
         ]);
 
         return $this->experience;
@@ -219,6 +229,12 @@ trait GiveExperience
     public function getPoints(): int
     {
         return $this->experience->experience_points;
+    }
+
+    //Get week experience points
+    public function getWeekPoints(): int
+    {
+        return $this->experience->week_experience_points;
     }
 
     public function levelUp(int $to): void
