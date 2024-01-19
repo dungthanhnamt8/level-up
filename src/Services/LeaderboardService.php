@@ -28,4 +28,18 @@ class LeaderboardService
             ->take($limit)
             ->when($paginate, fn (Builder $query) => $query->paginate(), fn (Builder $query) => $query->get());
     }
+
+    //Generate leaderboard for week
+    public function generateWeek(bool $paginate = false, int $limit = null): array|Collection|LengthAwarePaginator
+    {
+        return $this->userModel::query()
+            ->with(relations: ['experience', 'level'])
+            ->orderByDesc(
+                column: Experience::select('week_experience_points')
+                    ->whereColumn(config('level-up.user.foreign_key'), 'users.id')
+                    ->latest()
+            )
+            ->take($limit)
+            ->when($paginate, fn (Builder $query) => $query->paginate(), fn (Builder $query) => $query->get());
+    }
 }

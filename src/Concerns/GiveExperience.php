@@ -166,6 +166,8 @@ trait GiveExperience
         }
 
         $this->experience->decrement(column: 'experience_points', amount: $amount);
+        //week_experience_points
+        $this->experience->decrement(column: 'week_experience_points', amount: $amount);
 
         event(new PointsDecreased(
             pointsDecreasedBy: $amount,
