@@ -148,6 +148,34 @@ trait GiveExperience
         return $this->experience->status->level;
     }
 
+    //setLevel
+    public function setLevelNumber(int $level): Experience
+    {
+        if (! $this->experience()->exists()) {
+            throw new Exception(message: 'User has no experience record.');
+        }
+
+        $this->experience->update(attributes: [
+            'level_id' => $level,
+        ]);
+
+        return $this->experience;
+    }
+
+    //Set week level number
+    public function setWeekLevelNumber(int $level): Experience
+    {
+        if (! $this->experience()->exists()) {
+            throw new Exception(message: 'User has no experience record.');
+        }
+
+        $this->experience->update(attributes: [
+            'week_level' => $level,
+        ]);
+
+        return $this->experience;
+    }
+
     //Get week level
     public function getWeekLevel(): int
     {
