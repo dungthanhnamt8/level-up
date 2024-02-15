@@ -118,9 +118,9 @@ class Level extends Model
     protected function cacheForValue()
     {
         //is local
-        /*if (app()->environment('local')) {
+        if (app()->environment('local')) {
             return null;
-        }*/
+        }
 
         return $this->cacheFor;
     }

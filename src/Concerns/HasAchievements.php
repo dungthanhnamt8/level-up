@@ -51,6 +51,18 @@ trait HasAchievements
         return $newProgress;
     }
 
+    //Decrease achievement progress
+    public function decreaseAchievementProgress(Achievement $achievement, int $amount = 1)
+    {
+        $newProgress = max(0, ($this->achievements()->find($achievement->id)->pivot->progress ?? 0) - $amount);
+
+        $this->achievements()->updateExistingPivot($achievement->id, attributes: ['progress' => $newProgress]);
+
+        event(new AchievementProgressionIncreased(achievement: $achievement, user: $this, amount: $amount));
+
+        return $newProgress;
+    }
+
     public function allAchievements(): BelongsToMany
     {
         return $this->belongsToMany(related: Achievement::class)
