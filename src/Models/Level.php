@@ -132,18 +132,18 @@ class Level extends Model
     {
         static::created(function (Level $agent) {
             // ...
-            $agent::flushQueryCache(['test']);
+            $agent::flushQueryCache(['levels']);
         });
         //Update
         static::saved(function (Level $agent) {
             // ...
-            $agent::flushQueryCache(['test']);
+            $agent::flushQueryCache(['levels']);
         });
 
         //Delete
         static::deleted(function (Level $agent) {
             // ...
-            $agent::flushQueryCache(['test']);
+            $agent::flushQueryCache(['levels']);
         });
     }
 

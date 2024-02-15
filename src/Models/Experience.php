@@ -106,18 +106,18 @@ class Experience extends Model
     {
         static::created(function (Experience $agent) {
             // ...
-            $agent::flushQueryCache(['test']);
+            $agent::flushQueryCache(['experiences']);
         });
         //Update
         static::saved(function (Experience $agent) {
             // ...
-            $agent::flushQueryCache(['test']);
+            $agent::flushQueryCache(['experiences']);
         });
 
         //Delete
         static::deleted(function (Experience $agent) {
             // ...
-            $agent::flushQueryCache(['test']);
+            $agent::flushQueryCache(['experiences']);
         });
     }
 

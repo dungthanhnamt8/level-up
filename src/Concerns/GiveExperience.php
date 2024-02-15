@@ -145,7 +145,7 @@ trait GiveExperience
 
     public function getLevel(): int
     {
-        return $this->experience->status->level;
+        return $this->experience->status->level ?? 0;
     }
 
     //setLevel
@@ -272,13 +272,13 @@ trait GiveExperience
 
     public function getPoints(): int
     {
-        return $this->experience->experience_points;
+        return $this->experience->experience_points ?? 0;
     }
 
     //Get week experience points
     public function getWeekPoints(): int
     {
-        return $this->experience->week_experience_points;
+        return $this->experience->week_experience_points ?? 0;
     }
 
     public function levelUp(int $to): void
