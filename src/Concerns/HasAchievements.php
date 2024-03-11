@@ -21,7 +21,9 @@ trait HasAchievements
         }
 
         if ($this->allAchievements()->find($achievement->id)) {
-            throw new Exception(message: 'User already has this Achievement');
+            //Todo return a message
+            return;
+            //throw new Exception(message: 'User already has this Achievement');
         }
 
         $this->achievements()->attach($achievement, [
