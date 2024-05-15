@@ -21,7 +21,7 @@
         "php": "^8.1|^8.2",
         "illuminate/support": "^10.0|^11.0",
         "spatie/laravel-package-tools": "^1.15",
-        "tool4/laravel-eloquent-query-cache": "dev-main"
+        "tool4/laravel-eloquent-query-cache": "dev-master"
     },
     "require-dev": {
         "laravel/pint": "^1.10",
