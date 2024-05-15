@@ -22,7 +22,7 @@
         "illuminate/contracts": "^10.0|^11.0",
         "laravel/pint": "^1.10",
         "spatie/laravel-package-tools": "^1.15",
-        "tool4/laravel-eloquent-query-cache": "^3.4"
+        "tool4/laravel-eloquent-query-cache": "dev-main"
     },
     "require-dev": {
         "driftingly/rector-laravel": "^0.21.0",
