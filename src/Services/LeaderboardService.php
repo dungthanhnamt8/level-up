@@ -18,7 +18,13 @@ class LeaderboardService
 
     public function generate(bool $paginate = false, int $limit = null): array|Collection|LengthAwarePaginator
     {
+        $LoginUser = auth()->user();
+        //User company
+        $UserCompanyId = $LoginUser->company_id;
+
         return $this->userModel::query()
+            //Where company
+            ->where('company_id', $UserCompanyId)
             ->with(relations: ['experience', 'level'])
             ->orderByDesc(
                 column: Experience::select('experience_points')
@@ -32,7 +38,13 @@ class LeaderboardService
     //Generate leaderboard for week
     public function generateWeek(bool $paginate = false, int $limit = null): array|Collection|LengthAwarePaginator
     {
+        $LoginUser = auth()->user();
+        //User company
+        $UserCompanyId = $LoginUser->company_id;
+
         return $this->userModel::query()
+            //Where company
+            ->where('company_id', $UserCompanyId)
             ->with(relations: ['experience', 'level'])
             ->orderByDesc(
                 column: Experience::select('week_experience_points')
