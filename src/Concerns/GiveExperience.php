@@ -73,6 +73,7 @@ trait GiveExperience
                 'level_id' => $level->level ?? config(key: 'level-up.starting_level'),
                 'experience_points' => $amount,
                 'week_experience_points' => $amount,
+                'month_experience_points' => $amount,
             ]);
 
             /**
@@ -99,8 +100,12 @@ trait GiveExperience
         }
 
         $this->experience->increment(column: 'experience_points', amount: $amount);
-        //week_experience_points
+
+        //Week_experience_points
         $this->experience->increment(column: 'week_experience_points', amount: $amount);
+
+        //Month_experience_points
+        $this->experience->increment(column: 'month_experience_points', amount: $amount);
 
         $this->dispatchEvent($amount, $type, $reason);
 
@@ -176,10 +181,28 @@ trait GiveExperience
         return $this->experience;
     }
 
+    public function setMonthLevelNumber(int $level): Experience
+    {
+        if (! $this->experience()->exists()) {
+            throw new Exception(message: 'User has no experience record.');
+        }
+
+        $this->experience->update(attributes: [
+            'month_level' => $level,
+        ]);
+
+        return $this->experience;
+    }
+
     //Get week level
     public function getWeekLevel(): int
     {
         return $this->experience->status->week_level;
+    }
+
+    public function getMonthLevel(): int
+    {
+        return $this->experience->status->month_level;
     }
 
     public function experienceHistory(): HasMany
@@ -238,6 +261,19 @@ trait GiveExperience
         return $this->experience;
     }
 
+    public function setMonthPoints(int $amount): Experience
+    {
+        if (! $this->experience()->exists()) {
+            throw new Exception(message: 'User has no experience record.');
+        }
+
+        $this->experience->update(attributes: [
+            'month_experience_points' => $amount,
+        ]);
+
+        return $this->experience;
+    }
+
     public function withMultiplierData(array|callable $data): static
     {
         if ($data instanceof Closure) {
@@ -279,6 +315,12 @@ trait GiveExperience
     public function getWeekPoints(): int
     {
         return $this->experience->week_experience_points ?? 0;
+    }
+
+    //Get month experience points
+    public function getMonthPoints(): int
+    {
+        return $this->experience->month_experience_points ?? 0;
     }
 
     public function levelUp(int $to): void

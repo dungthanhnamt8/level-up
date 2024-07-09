@@ -14,9 +14,12 @@ return new class extends Migration
             $table->foreignId('level_id')->constrained();
             $table->integer('experience_points')->default(0)->index();
             $table->integer('week_level')->default(0)->index();
+            $table->integer('month_level')->default(0)->index();
+            //Week
             $table->integer('week_experience_points')->default(0)->index();
             //Month
             $table->integer('month_experience_points')->default(0)->index();
+
             $table->timestamps();
         });
     }
