@@ -24,7 +24,7 @@ class LeaderboardService
 
         return $this->userModel::query()
             //Where company
-            ->where('company_id', $UserCompanyId)
+            //->where('company_id', $UserCompanyId)
             ->with(relations: ['experience', 'level'])
             ->orderByDesc(
                 column: Experience::select('experience_points')
@@ -44,7 +44,8 @@ class LeaderboardService
 
         return $this->userModel::query()
             //Where company
-            ->where('company_id', $UserCompanyId)
+            //->where('company_id', $UserCompanyId)
+            //->where('is_complete_edu_lms', true)
             ->with(relations: ['experience', 'level'])
             ->orderByDesc(
                 column: Experience::select('week_experience_points')
